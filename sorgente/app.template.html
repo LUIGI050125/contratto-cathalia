@@ -1,0 +1,308 @@
+<title>Contratto Ca'Thalia</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Fraunces:opsz,wght@9..144,600&display=swap">
+<style>
+/* Layout: una colonna di passaggi numerati, barra fissa in basso con totale e pulsante principale */
+:root {
+  --bg: #e9eee8;
+  --card: #ffffff;
+  --ink: #1b2620;
+  --muted: #56655b;
+  --line: #cfd8d0;
+  --field: #f7f9f6;
+  --accent: #2d5b47;
+  --accent-ink: #ffffff;
+  --accent-soft: #dceadf;
+  --warn: #8a5300;
+  --warn-soft: #fff1d6;
+  --err: #a1241b;
+  --err-soft: #fbe5e2;
+  --ok: #276b44;
+  --ok-soft: #dff1e5;
+  --shadow: 0 1px 2px rgba(20, 40, 28, .06), 0 6px 20px rgba(20, 40, 28, .06);
+  --c-a: #e2c522; --c-b: #9b59ad; --c-c: #d53a2f; --c-d: #3d5fb8; --c-e: #5aa64b;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --r: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121814; --card: #1b231e; --ink: #e5ebe6; --muted: #9eb0a4; --line: #304037; --field: #151c17;
+    --accent: #86c4a5; --accent-ink: #0d1510; --accent-soft: #223a2d; --warn: #f0b55a; --warn-soft: #3a2c12;
+    --err: #ff9a8f; --err-soft: #3d1e1a; --ok: #8fd3a8; --ok-soft: #1d3527; --shadow: none; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121814; --card: #1b231e; --ink: #e5ebe6; --muted: #9eb0a4; --line: #304037; --field: #151c17;
+  --accent: #86c4a5; --accent-ink: #0d1510; --accent-soft: #223a2d; --warn: #f0b55a; --warn-soft: #3a2c12;
+  --err: #ff9a8f; --err-soft: #3d1e1a; --ok: #8fd3a8; --ok-soft: #1d3527; --shadow: none; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 17px; line-height: 1.45;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 140px;
+}
+.wrap { max-width: 780px; margin: 0 auto; }
+header.top { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-block: 22px 14px; }
+.brand small { display: block; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+.brand h1 { font-family: var(--f-display); font-weight: 600; font-size: 34px; line-height: 1.05; margin: 2px 0 0; text-wrap: balance; }
+.top-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.intro { color: var(--muted); margin: 0 0 18px; max-width: 62ch; }
+
+.step { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow); padding: 18px 18px 20px; margin-bottom: 16px; }
+.step-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.num { flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font-weight: 700; font-size: 17px; }
+.step h2 { font-size: 21px; margin: 0; line-height: 1.2; text-wrap: balance; }
+.step-head p { margin: 2px 0 0; color: var(--muted); font-size: 15px; }
+.step-head > div { min-width: 0; }
+
+.grid { display: grid; gap: 14px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid.three { grid-template-columns: 2fr 1fr; }
+.span2 { grid-column: 1 / -1; }
+@media (max-width: 560px) { .grid, .grid.three { grid-template-columns: minmax(0, 1fr); } }
+
+.f { display: flex; flex-direction: column; gap: 6px; min-width: 0; position: relative; }
+.f > label, .lbl { font-weight: 700; font-size: 15px; }
+.f .hint { font-size: 14px; color: var(--muted); }
+input[type=text], input[type=date], input[type=time], input[type=tel], textarea, select {
+  font: inherit; color: var(--ink); background: var(--field); border: 1.5px solid var(--line); border-radius: 10px;
+  min-height: 50px; padding: 10px 12px; width: 100%; min-width: 0;
+}
+textarea { min-height: 84px; resize: vertical; }
+input:focus, textarea:focus, select:focus, button:focus-visible, .chip:focus-within, .room:focus-within {
+  outline: 3px solid color-mix(in srgb, var(--accent) 45%, transparent); outline-offset: 1px; border-color: var(--accent);
+}
+input.auto { background: var(--accent-soft); }
+.euro { position: relative; }
+.euro input { padding-right: 34px; font-variant-numeric: tabular-nums; }
+.euro::after { content: "€"; position: absolute; right: 13px; top: 50%; transform: translateY(-50%); color: var(--muted); font-weight: 700; pointer-events: none; }
+
+button { font: inherit; cursor: pointer; border-radius: 12px; min-height: 48px; padding: 10px 16px; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); font-weight: 700; }
+button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+button.ghost { background: transparent; }
+button.small { min-height: 38px; padding: 6px 12px; font-size: 15px; border-radius: 10px; }
+button.link { border: 0; background: none; color: var(--accent); padding: 4px 0; min-height: 0; text-decoration: underline; font-weight: 700; font-size: 15px; }
+button.danger { color: var(--err); }
+button:disabled { opacity: .55; cursor: default; }
+
+.person { border: 1.5px solid var(--line); border-radius: 12px; padding: 14px; margin-bottom: 14px; background: color-mix(in srgb, var(--card) 92%, var(--accent-soft)); }
+.person-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.person-head h3 { margin: 0; font-size: 18px; }
+.seg { display: inline-flex; border: 1.5px solid var(--line); border-radius: 10px; overflow: hidden; }
+.seg button { border: 0; border-radius: 0; min-height: 46px; padding: 8px 16px; background: var(--field); font-weight: 700; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+
+.note { border-radius: 10px; padding: 9px 12px; font-size: 15px; }
+.note.ok { background: var(--ok-soft); color: var(--ok); }
+.note.warn { background: var(--warn-soft); color: var(--warn); }
+.note.err { background: var(--err-soft); color: var(--err); }
+.note:empty { display: none; }
+
+.ac { position: absolute; left: 0; right: 0; top: 100%; z-index: 30; margin-top: 4px; background: var(--card); border: 1.5px solid var(--line); border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,.18); overflow: hidden; }
+.ac button { display: block; width: 100%; text-align: left; border: 0; border-radius: 0; min-height: 46px; font-weight: 400; background: var(--card); }
+.ac button[aria-selected="true"], .ac button:hover { background: var(--accent-soft); }
+
+.rooms { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+.room { display: flex; gap: 12px; align-items: flex-start; border: 1.5px solid var(--line); border-radius: 12px; padding: 12px; cursor: pointer; background: var(--field); }
+.room input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.room .dot { flex: none; width: 26px; height: 26px; border-radius: 7px; border: 3px solid var(--dot); display: grid; place-items: center; margin-top: 1px; }
+.room .dot::after { content: ""; width: 12px; height: 7px; border-left: 3px solid #fff; border-bottom: 3px solid #fff; transform: rotate(-45deg) translate(1px, -1px); opacity: 0; }
+.room input:checked + .dot { background: var(--dot); }
+.room input:checked + .dot::after { opacity: 1; }
+.room:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+.room b { display: block; font-size: 16px; }
+.room span.d { display: block; font-size: 14px; color: var(--muted); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip { display: inline-flex; align-items: center; gap: 10px; border: 1.5px solid var(--line); border-radius: 12px; padding: 10px 14px; min-height: 48px; cursor: pointer; background: var(--field); font-weight: 700; }
+.chip input { width: 22px; height: 22px; accent-color: var(--accent); margin: 0; }
+.chip:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+
+.toggle { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; }
+.toggle input { width: 24px; height: 24px; accent-color: var(--accent); flex: none; margin: 2px 0 0; }
+
+.sum { border-top: 1.5px dashed var(--line); margin-top: 16px; padding-top: 14px; display: grid; gap: 4px; font-variant-numeric: tabular-nums; }
+.sum .row { display: flex; justify-content: space-between; gap: 12px; }
+.sum .row.tot { font-weight: 700; font-size: 18px; border-top: 1px solid var(--line); padding-top: 6px; margin-top: 2px; }
+
+details.more { margin-top: 2px; }
+details.more summary { cursor: pointer; font-weight: 700; color: var(--accent); padding: 6px 0; }
+
+.bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: color-mix(in srgb, var(--card) 94%, transparent); backdrop-filter: blur(8px); border-top: 1px solid var(--line);
+  padding: 10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.bar .in { max-width: 780px; margin: 0 auto; display: flex; gap: 12px; align-items: center; justify-content: space-between; }
+.bar .tot { font-size: 15px; color: var(--muted); font-variant-numeric: tabular-nums; min-width: 0; }
+.bar .tot b { color: var(--ink); font-size: 17px; }
+.bar button.primary { min-height: 54px; font-size: 18px; padding-inline: 22px; }
+@media (max-width: 560px) { .bar .in { flex-direction: column; align-items: stretch; gap: 6px; } .bar .tot { text-align: center; } }
+
+.overlay { position: fixed; inset: 0; z-index: 40; background: rgba(10, 18, 13, .55); display: flex; align-items: flex-start; justify-content: center; overflow-y: auto;
+  padding: max(12px, env(safe-area-inset-top, 0px)) max(12px, env(safe-area-inset-right, 0px)) max(12px, env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px)); }
+.panel { background: var(--card); color: var(--ink); border-radius: 16px; width: 100%; max-width: 860px; padding: 20px; margin: 12px 0 40px; }
+.panel h2 { margin: 0 0 6px; font-size: 24px; font-family: var(--f-display); font-weight: 600; }
+.panel-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+.panel-actions .primary { flex: 1 1 260px; min-height: 56px; font-size: 18px; }
+.recap { display: grid; gap: 8px; margin: 12px 0; padding: 0; list-style: none; }
+.recap li { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.recap li b { color: var(--muted); font-size: 15px; }
+@media (max-width: 560px) { .recap li { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+.pages { display: grid; gap: 14px; margin-top: 10px; }
+.pages canvas { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; background: #fff; box-shadow: var(--shadow); }
+.pages .lab { font-size: 14px; color: var(--muted); margin: 0 0 4px; }
+.list { display: grid; gap: 10px; margin-top: 10px; }
+.item { border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.item div { min-width: 0; }
+.item b { display: block; }
+.item span { color: var(--muted); font-size: 15px; }
+.item .acts { display: flex; gap: 8px; flex-wrap: wrap; }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(110px + env(safe-area-inset-bottom, 0px)); z-index: 60; background: var(--ink); color: var(--card); padding: 12px 18px; border-radius: 12px; font-weight: 700; max-width: calc(100% - 32px); }
+.muted { color: var(--muted); }
+.busy { opacity: .6; pointer-events: none; }
+@media (prefers-reduced-motion: no-preference) { .step, .panel { animation: in .25s ease-out both; } @keyframes in { from { transform: translateY(6px); } to { transform: none; } } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <small>Contratto di locazione per un singolo evento</small>
+      <h1>Ca'Thalia</h1>
+    </div>
+    <div class="top-actions">
+      <button type="button" class="small" id="btn-storico">Contratti salvati</button>
+      <button type="button" class="small" id="btn-nuovo">Nuovo contratto</button>
+    </div>
+  </header>
+  <p class="intro">Compila i riquadri dall'alto in basso. Quello che non sai puoi lasciarlo vuoto: nel contratto resterà la riga da scrivere a mano. Alla fine premi <b>Controlla e crea il PDF</b>.</p>
+
+  <form id="form" autocomplete="off" novalidate>
+    <section class="step" aria-labelledby="t1">
+      <div class="step-head"><span class="num">1</span><div><h2 id="t1">Chi prende in affitto</h2><p>Scrivi prima il codice fiscale: data e luogo di nascita si compilano da soli.</p></div></div>
+      <div id="persone"></div>
+      <button type="button" id="btn-aggiungi">+ Aggiungi un'altra persona</button>
+    </section>
+
+    <section class="step" aria-labelledby="t2">
+      <div class="step-head"><span class="num">2</span><div><h2 id="t2">Quando</h2><p>Il giorno della festa e quando riportano le chiavi.</p></div></div>
+      <div class="grid">
+        <div class="f"><label for="dal">Giorno della festa</label><input type="date" id="dal" data-k="dal"></div>
+        <div class="f"><label for="al">Riconsegna dei locali</label><input type="date" id="al" data-k="al"><span class="hint" id="al-hint"></span></div>
+        <div class="f"><label for="ora">Ora della riconsegna</label><input type="time" id="ora" data-k="ora"></div>
+        <div class="f"><label for="dataContratto">Data del contratto</label><input type="date" id="dataContratto" data-k="dataContratto"><span class="hint">Di solito oggi.</span></div>
+      </div>
+      <p class="note warn" id="date-note"></p>
+    </section>
+
+    <section class="step" aria-labelledby="t3">
+      <div class="step-head"><span class="num">3</span><div><h2 id="t3">Quali spazi</h2><p>I colori sono quelli della planimetria allegata.</p></div></div>
+      <div class="rooms" id="locali"></div>
+    </section>
+
+    <section class="step" aria-labelledby="t4">
+      <div class="step-head"><span class="num">4</span><div><h2 id="t4">Prezzo e pagamento</h2><p>Caparra e saldo si calcolano da soli.</p></div></div>
+      <div class="grid">
+        <div class="f"><label for="canone">Prezzo dell'affitto (canone)</label><div class="euro"><input type="text" inputmode="decimal" id="canone" data-k="canone" placeholder="es. 300"></div></div>
+        <div class="f"><label for="pulizie">Pulizie finali</label><div class="euro"><input type="text" inputmode="decimal" id="pulizie" data-k="pulizie" placeholder="0 = nessuna"></div><span class="hint">Metti 0 se non si fanno pagare.</span></div>
+        <div class="f"><label for="riscaldamento">Riscaldamento</label><div class="euro"><input type="text" inputmode="decimal" id="riscaldamento" data-k="riscaldamento"></div></div>
+        <div class="f" style="justify-content:center">
+          <label class="toggle" for="riscInSaldo"><input type="checkbox" id="riscInSaldo" data-k="riscInSaldo"><span><b>Il riscaldamento si paga</b><br><span class="hint">Lo aggiunge al saldo (di solito da ottobre ad aprile).</span></span></label>
+        </div>
+        <div class="f"><label for="caparra">Caparra alla firma</label><div class="euro"><input type="text" inputmode="decimal" id="caparra" data-k="caparra"></div><span class="hint" id="caparra-hint"></span></div>
+        <div class="f"><label for="saldo">Saldo (15 giorni prima)</label><div class="euro"><input type="text" inputmode="decimal" id="saldo" data-k="saldo"></div><span class="hint" id="saldo-hint"></span></div>
+        <div class="f span2">
+          <span class="lbl">Il saldo si paga con</span>
+          <div class="chips" role="radiogroup">
+            <label class="chip"><input type="radio" name="pagamento" value="bonifico" data-k="pagamento"> Bonifico bancario</label>
+            <label class="chip"><input type="radio" name="pagamento" value="altro" data-k="pagamento"> Altro</label>
+          </div>
+          <input type="text" id="pagamentoAltro" data-k="pagamentoAltro" placeholder="es. contanti" hidden>
+        </div>
+      </div>
+      <div class="sum" id="sum"></div>
+    </section>
+
+    <section class="step" aria-labelledby="t5">
+      <div class="step-head"><span class="num">5</span><div><h2 id="t5">Chiavi da consegnare</h2><p>Già scelte in base agli spazi: cambia pure se serve.</p></div></div>
+      <div class="chips" id="chiavi"></div>
+      <div class="f" style="margin-top:12px"><label for="chiaviAltro">Altre chiavi (facoltativo)</label><input type="text" id="chiaviAltro" data-k="chiaviAltro" placeholder="es. telecomando del cancello"></div>
+    </section>
+
+    <section class="step" aria-labelledby="t6">
+      <div class="step-head"><span class="num">6</span><div><h2 id="t6">Sopralluogo</h2><p>Se la data non c'è ancora, lascia vuoto.</p></div></div>
+      <div class="grid">
+        <div class="f"><label for="sopralluogoData">Data del sopralluogo</label><input type="date" id="sopralluogoData" data-k="sopralluogoData"></div>
+        <div class="f"><label for="sopralluogoLocatore">Presente per il proprietario</label><input type="text" id="sopralluogoLocatore" data-k="sopralluogoLocatore"></div>
+        <div class="f span2"><label for="sopralluogoConduttore">Presenti per chi affitta</label><input type="text" id="sopralluogoConduttore" data-k="sopralluogoConduttore"><span class="hint" id="sopr-hint"></span></div>
+      </div>
+    </section>
+
+    <section class="step" aria-labelledby="t7">
+      <div class="step-head"><span class="num">7</span><div><h2 id="t7">Firma e note</h2><p>Le note sono facoltative.</p></div></div>
+      <div class="grid">
+        <div class="f span2">
+          <label class="toggle" for="firma"><input type="checkbox" id="firma" data-k="firma"><span><b>Metti la firma per il proprietario</b><br><span class="hint">Scritta in corsivo blu sopra la riga "La parte Locatrice", come nei contratti già mandati.</span></span></label>
+        </div>
+        <div class="f"><label for="firmaNome">Nome della firma</label><input type="text" id="firmaNome" data-k="firmaNome"></div>
+        <div class="f"><label for="temperatura">Temperatura del riscaldamento</label><input type="text" inputmode="numeric" id="temperatura" data-k="temperatura" placeholder="es. 21"><span class="hint">In gradi. Va nel regolamento (punto 3.4).</span></div>
+        <div class="f span2"><label for="accordi">Accordi particolari</label><textarea id="accordi" data-k="accordi" placeholder="es. Possono entrare dalle 15 del giorno prima per allestire."></textarea><span class="hint">Se scrivi qualcosa, compare nel contratto al punto 2.</span></div>
+        <div class="f span2"><label for="osservazioni">Osservazioni sull'inventario</label><textarea id="osservazioni" data-k="osservazioni" placeholder="es. Sedia del Festìn con una gamba rovinata."></textarea><span class="hint">Va nell'Allegato A. Se lasci vuoto restano le righe da scrivere a mano.</span></div>
+      </div>
+    </section>
+  </form>
+</div>
+
+<div class="bar">
+  <div class="in">
+    <div class="tot" id="bar-tot" aria-live="polite"></div>
+    <button type="button" class="primary" id="btn-crea">Controlla e crea il PDF</button>
+  </div>
+</div>
+
+<div class="overlay" id="ov-check" hidden role="dialog" aria-modal="true" aria-labelledby="ov-check-t">
+  <div class="panel">
+    <h2 id="ov-check-t">Controlla prima di scaricare</h2>
+    <p class="muted" id="ov-check-file"></p>
+    <div id="ov-warn"></div>
+    <ul class="recap" id="ov-recap"></ul>
+    <div class="panel-actions">
+      <button type="button" class="primary" id="btn-scarica">Scarica il contratto (PDF)</button>
+      <button type="button" id="btn-modifica">Torna a modificare</button>
+    </div>
+    <p class="note" id="ov-esito" role="status"></p>
+    <div class="pages" id="pages"><p class="muted">Preparo l'anteprima…</p></div>
+  </div>
+</div>
+
+<div class="overlay" id="ov-storico" hidden role="dialog" aria-modal="true" aria-labelledby="ov-storico-t">
+  <div class="panel">
+    <h2 id="ov-storico-t">Contratti salvati</h2>
+    <p class="muted">Ogni contratto scaricato resta qui, su questo dispositivo. Aprilo per correggerlo, oppure duplicalo per un cliente che torna.</p>
+    <div class="list" id="storico"></div>
+    <div class="panel-actions"><button type="button" id="btn-chiudi-storico">Chiudi</button></div>
+  </div>
+</div>
+
+<div class="overlay" id="ov-nuovo" hidden role="dialog" aria-modal="true" aria-labelledby="ov-nuovo-t">
+  <div class="panel" style="max-width:520px">
+    <h2 id="ov-nuovo-t">Iniziare un nuovo contratto?</h2>
+    <p>Il modulo si svuota. I contratti già scaricati restano in <b>Contratti salvati</b>.</p>
+    <div class="panel-actions"><button type="button" class="primary" id="btn-nuovo-ok">Sì, svuota il modulo</button><button type="button" id="btn-nuovo-no">No, torna indietro</button></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden role="status"></div>
+
+__LIBS__
+<script>
+__ENGINE__
+</script>
+<script>
+__COMUNI__
+var ASSET_FIRMA = "__FIRMA_B64__";
+var ASSET_PLANIMETRIA = "__PLANIMETRIA_B64__";
+</script>
+<script>
+__APP__
+</script>
